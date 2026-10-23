@@ -1,5 +1,5 @@
 {
   "appId": "com.camerareact",
   "appName": "Camêra React",
-  "webDir": "www"
+  "webDir": "dist"
 }

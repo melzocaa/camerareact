@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lens — Camera App</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['DM Sans', 'sans-serif'],
+                        heading: ['Manrope', 'sans-serif']
+                    },
+                    colors: {
+                        ink: '#171923',
+                        accent: '#6658F5',
+                        soft: '#F5F5FA'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>*{box-sizing:border-box}body{background:#f5f5fa;margin:0;font-family:DM Sans,sans-serif}.font-heading{font-family:Manrope,sans-serif}.preview-grid{background-image:linear-gradient(#ffffff59 1px,#0000 1px),linear-gradient(90deg,#ffffff59 1px,#0000 1px);background-size:32px 32px}.camera-lens{background:radial-gradient(circle at 35% 30%,#a5a0ff 0%,#6658f5 28%,#393184 62%,#201c43 100%);box-shadow:0 16px 35px #6658f53d}button{-webkit-tap-highlight-color:transparent}</style>
+  <script type="module" crossorigin src="./assets/index-CTwx3V0N.js"></script>
+</head>
+
+<body class="min-h-screen text-ink antialiased">
+
+    <!-- Cabeçalho -->
+    <header class="border-b border-gray-200/80 bg-white">
+        <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+
+            <a href="#" class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-white">
+                    <svg width="23" height="23" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 7h4l2-3h4l2 3h4a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                </div>
+
+                <div>
+                    <span class="font-heading text-xl font-extrabold tracking-tight">lens.</span>
+                    <p class="text-xs text-gray-500">Capture your moments</p>
+                </div>
+            </a>
+
+            <div class="hidden items-center gap-2 rounded-full border border-gray-200 px-3 py-2 sm:flex">
+                <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                <span class="text-xs font-medium text-gray-600">Seu espaço criativo</span>
+            </div>
+
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[#ECEAFF] font-heading text-sm font-bold text-accent">
+                L
+            </div>
+        </div>
+    </header>
+
+    <main class="mx-auto max-w-6xl px-5 py-10 sm:px-6 sm:py-16">
+
+        <!-- Introdução -->
+        <section class="mb-10 max-w-2xl">
+            <div class="mb-5 inline-flex items-center gap-2 rounded-full border border-[#E4E0FF] bg-white px-3 py-1.5">
+                <span class="h-2 w-2 rounded-full bg-accent"></span>
+                <span class="text-xs font-semibold uppercase tracking-wider text-accent">
+                    Seu estúdio digital
+                </span>
+            </div>
+
+            <h1 class="font-heading text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+                Um instante.
+                <span class="block text-accent">Uma nova perspectiva.</span>
+            </h1>
+
+            <p class="mt-5 max-w-xl text-base leading-7 text-gray-500 sm:text-lg">
+                Capture uma lembrança ou escolha uma imagem do seu dispositivo.
+                Tudo em um só lugar, de forma simples e intuitiva.
+            </p>
+        </section>
+
+        <section class="grid items-start gap-6 lg:grid-cols-[1.4fr_0.8fr]">
+
+            <!-- Área de pré-visualização -->
+            <div class="overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm">
+
+                <div class="flex items-center justify-between border-b border-gray-100 px-5 py-4 sm:px-7">
+                    <div>
+                        <h2 class="font-heading text-base font-bold">Área de captura</h2>
+                        <p class="mt-1 text-xs text-gray-500">Sua próxima imagem começa aqui</p>
+                    </div>
+
+                    <span class="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-semibold text-gray-500">
+                        PREVIEW
+                    </span>
+                </div>
+
+                <div class="p-4 sm:p-7">
+                    <div id="area-preview"
+                        class="preview-grid relative flex min-h-[300px] flex-col items-center justify-center overflow-hidden rounded-2xl bg-[#F0EFFB] px-5 py-10 sm:min-h-[390px]">
+
+                        <div class="absolute left-5 top-5 h-7 w-7 rounded-tl-lg border-l-2 border-t-2 border-[#C7C1FF]"></div>
+                        <div class="absolute right-5 top-5 h-7 w-7 rounded-tr-lg border-r-2 border-t-2 border-[#C7C1FF]"></div>
+                        <div class="absolute bottom-5 left-5 h-7 w-7 rounded-bl-lg border-b-2 border-l-2 border-[#C7C1FF]"></div>
+                        <div class="absolute bottom-5 right-5 h-7 w-7 rounded-br-lg border-b-2 border-r-2 border-[#C7C1FF]"></div>
+
+                        <div id="placeholder" class="flex flex-col items-center">
+                            <div class="camera-lens relative mb-7 flex h-28 w-28 items-center justify-center rounded-[32px]">
+                                <div class="flex h-[66px] w-[66px] items-center justify-center rounded-full border-4 border-white/30 bg-[#29245E]">
+                                    <div class="h-10 w-10 rounded-full border-4 border-[#AAA5FF] bg-[#4B43A0]">
+                                        <div class="ml-1.5 mt-1.5 h-2 w-2 rounded-full bg-white/80"></div>
+                                    </div>
+                                </div>
+
+                                <div class="absolute -right-2 -top-2 flex h-9 w-9 items-center justify-center rounded-xl border-4 border-[#F0EFFB] bg-white text-accent">
+                                    <span class="text-xl">+</span>
+                                </div>
+                            </div>
+
+                            <h3 class="font-heading text-center text-xl font-bold">
+                                Sua imagem aparecerá aqui
+                            </h3>
+
+                            <p class="mt-2 max-w-xs text-center text-sm leading-6 text-gray-500">
+                                Escolha uma imagem para visualizar nesta área.
+                            </p>
+
+                            <div class="mt-6 rounded-full border border-white bg-white/80 px-4 py-2 text-xs font-medium text-gray-500">
+                                Nenhuma imagem selecionada
+                            </div>
+                        </div>
+
+                        <img id="imagem-preview"
+                            class="hidden relative z-10 max-h-[350px] max-w-full rounded-xl object-contain"
+                            alt="Imagem selecionada">
+
+                        <p id="legenda-preview"
+                            class="relative z-10 mt-4 hidden text-sm font-semibold text-gray-700">
+                            Imagem carregada com sucesso!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between border-t border-gray-100 px-5 py-4 sm:px-7">
+                    <span class="text-xs text-gray-400">LENS STUDIO · 001</span>
+
+                    <span id="status-preview" class="flex items-center gap-2 text-xs font-medium text-gray-500">
+                        <span class="h-2 w-2 rounded-full bg-gray-300"></span>
+                        Aguardando imagem
+                    </span>
+                </div>
+            </div>
+
+            <!-- Painel lateral -->
+            <aside class="space-y-5">
+
+                <div class="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-7">
+                    <span class="text-xs font-bold uppercase tracking-widest text-accent">
+                        Comece agora
+                    </span>
+
+                    <h2 class="mt-3 font-heading text-2xl font-extrabold">
+                        Como deseja adicionar sua foto?
+                    </h2>
+
+                    <p class="mt-3 text-sm leading-6 text-gray-500">
+                        Escolha uma das opções para adicionar sua imagem.
+                    </p>
+
+                    <button id="botao-camera" type="button"
+                        class="mt-7 flex w-full items-center gap-4 rounded-2xl bg-accent p-4 text-left text-white transition hover:bg-[#5546E8]">
+                        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15">
+                            <svg width="25" height="25" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 7h4l2-3h4l2 3h4a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2Z"/>
+                                <circle cx="12" cy="13" r="4"/>
+                            </svg>
+                        </span>
+
+                        <span class="flex-1">
+                            <span class="block font-bold">Abrir câmera</span>
+                            <span class="mt-1 block text-xs text-white/75">Capture um novo momento</span>
+                        </span>
+
+                        <span aria-hidden="true">›</span>
+                    </button>
+
+                    <button id="botao-galeria" type="button"
+                        class="mt-3 flex w-full items-center gap-4 rounded-2xl border border-gray-200 bg-white p-4 text-left transition hover:border-[#C7C1FF] hover:bg-[#FAF9FF]">
+                        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#F0EFFB] text-accent">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="3"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <path d="m21 15-5-5L5 21"/>
+                            </svg>
+                        </span>
+
+                        <span class="flex-1">
+                            <span class="block font-bold text-ink">Escolher da galeria</span>
+                            <span class="mt-1 block text-xs text-gray-500">Use uma imagem existente</span>
+                        </span>
+
+                        <span class="text-gray-400" aria-hidden="true">›</span>
+                    </button>
+
+                    <input id="seletor-arquivo"
+                        type="file"
+                        accept="image/*"
+                        class="hidden">
+
+                    <button id="botao-remover"
+                        type="button"
+                        class="mt-3 hidden w-full rounded-xl bg-gray-100 px-4 py-3 text-sm font-semibold text-gray-600 transition hover:bg-gray-200">
+                        Remover imagem
+                    </button>
+
+                    <p id="mensagem"
+                        class="mt-4 text-center text-sm text-gray-500"
+                        role="status"
+                        aria-live="polite">
+                    </p>
+
+                    <p class="mt-3 text-center text-xs leading-5 text-gray-400">
+                        A câmera nativa será integrada na próxima etapa.
+                    </p>
+                </div>
+
+                <div class="rounded-3xl border border-[#E4E0FF] bg-[#ECEAFF] p-6">
+                    <div class="flex items-start gap-3">
+                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-accent">
+                            <svg width="21" height="21" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/>
+                                <path d="m9 12 2 2 4-4"/>
+                            </svg>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-sm font-bold">Privacidade em primeiro lugar</h3>
+                            <p class="mt-2 text-sm leading-6 text-gray-600">
+                                Suas imagens são exibidas localmente nesta página, sem envio para um servidor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+        </section>
+
+        <footer class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-gray-200 pt-6 text-xs text-gray-400 sm:flex-row">
+            <p>© 2026 Lens Studio. Projeto de estudo.</p>
+            <p>HTML · Tailwind CSS · JavaScript</p>
+        </footer>
+    </main>
+
+    
+</body>
+</html>
