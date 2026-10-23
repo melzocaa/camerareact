@@ -26,6 +26,12 @@ Instale também as bibliotecas utilizadas pela câmera e pelo Supabase, caso ain
 npm install @capacitor/camera @supabase/supabase-js
 ```
 
+Instale o TypeScript como dependência de desenvolvimento:
+
+```bash
+npm install -D typescript
+```
+
 ## 3. Criar o projeto no Supabase
 
 1. Acesse https://supabase.com/ e entre na sua conta.
@@ -80,13 +86,19 @@ O arquivo `.env` contém as configurações locais e não deve ser enviado ao Gi
 
 ## 6. Configurar a conexão com o Supabase
 
-No arquivo `www/supabase.js`, utilize:
+No arquivo `www/supabase.ts`, utilize:
 
-```javascript
+```typescript
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  throw new Error(
+    'Configure VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY no .env.'
+  );
+}
 
 export const supabase = createClient(
   supabaseUrl,
@@ -98,7 +110,7 @@ No arquivo `vite.config.js`, mantenha a configuração do projeto e a opção `e
 
 ## 7. Configurar o envio das fotos
 
-No arquivo `www/main.js`, o aplicativo utiliza:
+No arquivo `www/main.ts`, o aplicativo utiliza:
 
 - `Camera.getPhoto()` para fotografar o hodômetro ou escolher uma imagem da galeria.
 - A variável `fotoSelecionada` para manter a imagem escolhida antes do envio.
@@ -118,6 +130,12 @@ npm run dev
 ```
 
 Abra o endereço local informado pelo Vite no navegador.
+
+Para verificar se os tipos do TypeScript estão corretos, execute:
+
+```bash
+npx tsc --noEmit
+```
 
 Para verificar se o projeto compila corretamente, execute:
 
@@ -172,7 +190,7 @@ Depois de atualizar os arquivos, execute:
 
 ```bash
 git add .
-git commit -m "Integrar envio de fotos ao Supabase"
+git commit -m "Migrar projeto para TypeScript"
 git push
 ```
 
@@ -210,12 +228,13 @@ TaxiFrotaApp/
 ├── .gitignore
 ├── .env
 ├── package.json
+├── tsconfig.json
 ├── vite.config.js
 ├── capacitor.config.json
 ├── www/
 │   ├── index.html
-│   ├── main.js
-│   └── supabase.js
+│   ├── main.ts
+│   └── supabase.ts
 ├── dist/
 ├── android/
 └── .github/
@@ -229,7 +248,7 @@ A pasta `dist` é gerada automaticamente pelo comando `npm run build`.
 
 - HTML5
 - Tailwind CSS
-- JavaScript
+- TypeScript
 - Vite
 - Capacitor
 - Capacitor Camera
