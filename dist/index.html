@@ -36,7 +36,7 @@
   </script>
 
   <style>*{-webkit-tap-highlight-color:transparent}body{background:#f4f4f5;font-family:DM Sans,sans-serif}.font-heading{font-family:Manrope,sans-serif}.camera-frame{background-image:linear-gradient(45deg,#f4f4f5 25%,#0000 25% 75%,#f4f4f5 75%,#f4f4f5),linear-gradient(45deg,#f4f4f5 25%,#fff 25% 75%,#f4f4f5 75%,#f4f4f5);background-position:0 0,8px 8px;background-size:16px 16px}button{touch-action:manipulation}</style>
-  <script type="module" crossorigin src="./assets/index-M5jOE2Mq.js"></script>
+  <script type="module" crossorigin src="./assets/index-B1tVmVKI.js"></script>
 </head>
 
 <body class="min-h-screen text-zinc-900">
@@ -208,6 +208,24 @@
           </svg>
           Escolher da galeria
         </button>
+
+        
+        <button
+            id="botao-enviar"
+            type="button"
+            disabled
+            class="flex min-h-14 w-full items-center justify-center gap-3 rounded-2xl bg-yellow-400 px-5 py-4 font-bold text-zinc-950 shadow-sm transition hover:bg-yellow-300 disabled:cursor-not-allowed disabled:opacity-50 active:scale-[0.98]"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 16V4"/>
+        <path d="m7 9 5-5 5 5"/>
+        <path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/>
+        </svg>
+            Enviar foto para o Supabase
+        </button>
+
 
         <p id="mensagem" role="status" aria-live="polite"
           class="min-h-5 text-center text-sm font-medium text-zinc-600"></p>
